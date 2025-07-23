@@ -19,7 +19,7 @@ export interface Feature {
   id: string;
   title: string;
   description: string;
-  icon: LucideIcon;
+  icon: string; // Changed from LucideIcon to string
   color: string;
 }
 

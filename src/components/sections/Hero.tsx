@@ -107,58 +107,26 @@ export function Hero({ title, subtitle, primaryCTA, secondaryCTA }: HeroProps) {
     }
   );
 
-  // Smooth scroll transition effects
-  const contentBlur = useTransform(scrollYProgress, [0, 0.3, 0.8], [0, 1, 4]);
-  const contentRotateX = useTransform(scrollYProgress, [0, 0.5], [0, -5]);
+  // Smooth scroll transition effects - reduced blur for better readability
+  const contentBlur = useTransform(scrollYProgress, [0, 0.3, 0.8], [0, 0.5, 2]);
+  const contentRotateX = useTransform(scrollYProgress, [0, 0.5], [0, -3]);
 
-  // Background blur effect for depth
-  const backgroundBlur = useTransform(scrollYProgress, [0, 0.5, 1], [0, 2, 8]);
-  const backgroundScale = useSpring(
-    useTransform(scrollYProgress, [0, 1], [1, 1.1]),
-    {
-      stiffness: 80,
-      damping: 30,
-    }
-  );
+  // Background blur effect for depth (removed for smoother performance)
+  const backgroundBlur = useTransform(scrollYProgress, [0, 0.5, 1], [0, 1, 4]);
 
   return (
     <section
       ref={ref}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-purple-900"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Enhanced background with multiple layers and parallax */}
-      <motion.div
-        className="absolute inset-0 bg-gradient-to-br from-blue-100/30 via-purple-100/20 to-green-100/30 dark:from-blue-900/40 dark:via-purple-900/30 dark:to-green-900/40"
-        style={{
-          y: backgroundY,
-          scale: backgroundScale,
-          filter: `blur(${backgroundBlur}px)`,
-          opacity: useTransform(scrollYProgress, [0, 0.8], [1, 0.3]),
-        }}
-      />
+      {/* Fixed background with smooth gradient - Dark mode only */}
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-800" />
 
-      {/* Secondary background layer for depth */}
+      {/* Subtle overlay that fades on scroll */}
       <motion.div
-        className="absolute inset-0 bg-gradient-to-r from-blue-600/8 via-purple-600/12 to-green-600/8 dark:from-blue-400/15 dark:via-purple-400/20 dark:to-green-400/15"
+        className="absolute inset-0 bg-gradient-to-br from-blue-900/10 via-purple-900/5 to-green-900/10"
         style={{
-          y: useSpring(useTransform(scrollYProgress, [0, 1], ["0%", "60%"]), {
-            stiffness: 90,
-            damping: 35,
-          }),
-          opacity: useTransform(scrollYProgress, [0, 0.6], [1, 0.2]),
-          scale: useTransform(scrollYProgress, [0, 1], [1, 1.05]),
-        }}
-      />
-
-      {/* Tertiary background layer for enhanced depth */}
-      <motion.div
-        className="absolute inset-0 bg-gradient-to-t from-transparent via-blue-50/10 to-purple-50/10 dark:from-transparent dark:via-blue-900/10 dark:to-purple-900/10"
-        style={{
-          y: useSpring(useTransform(scrollYProgress, [0, 1], ["0%", "40%"]), {
-            stiffness: 110,
-            damping: 40,
-          }),
-          opacity: useTransform(scrollYProgress, [0, 0.5], [0.8, 0]),
+          opacity: useTransform(scrollYProgress, [0, 0.5], [1, 0]),
         }}
       />
 
@@ -216,7 +184,7 @@ export function Hero({ title, subtitle, primaryCTA, secondaryCTA }: HeroProps) {
                 },
               }}
             >
-              <Icon className="w-8 h-8 text-blue-500/40 dark:text-blue-400/40 drop-shadow-lg" />
+              <Icon className="w-8 h-8 text-gray-400/30 drop-shadow-lg" />
             </motion.div>
           );
         })}
@@ -269,7 +237,7 @@ export function Hero({ title, subtitle, primaryCTA, secondaryCTA }: HeroProps) {
             }}
           >
             <motion.span
-              className="bg-gradient-to-r from-blue-600 via-purple-600 to-green-600 bg-clip-text text-transparent"
+              className="bg-gradient-to-r from-blue-600 via-purple-600 to-green-600 dark:from-blue-400 dark:via-gray-200 dark:to-white bg-clip-text text-transparent"
               initial={{
                 backgroundPosition: "0% 50%",
                 backgroundSize: "200% 200%",
