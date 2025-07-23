@@ -1,0 +1,7 @@
+name = "landing.taptik.ai"
+compatibility_date = "2024-01-15"
+
+# 환경 변수
+[vars]
+PNPM_VERSION = "10.8.0"
+NODE_VERSION = "22"
