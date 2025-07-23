@@ -41,7 +41,7 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-  
+
   /* TapTik AI Custom Colors */
   --color-ai-blue: var(--ai-blue);
   --color-ai-purple: var(--ai-purple);
@@ -53,30 +53,32 @@
 :root {
   --radius: 0.625rem;
   /* Dark mode as default */
-  --background: oklch(0 0 0);     /* True black background */
-  --foreground: oklch(0.98 0 0);  /* Pure white text */
-  --card: oklch(0.02 0 0);        /* Very dark card background */
+  --background: oklch(0 0 0); /* True black background */
+  --foreground: oklch(0.98 0 0); /* Pure white text */
+  --card: oklch(0.02 0 0); /* Very dark card background */
   --card-foreground: oklch(0.95 0 0);
   --popover: oklch(0.02 0 0);
   --popover-foreground: oklch(0.95 0 0);
-  --primary: oklch(0.9 0 0);      /* Bright white primary */
+  --primary: oklch(0.9 0 0); /* Bright white primary */
   --primary-foreground: oklch(0 0 0);
-  --secondary: oklch(0.04 0 0);   /* Very dark secondary */
+  --secondary: oklch(0.04 0 0); /* Very dark secondary */
   --secondary-foreground: oklch(0.95 0 0);
-  --muted: oklch(0.03 0 0);       /* Very dark muted */
-  --muted-foreground: oklch(0.7 0 0);  /* Brighter muted text for better readability */
-  --accent: oklch(0.04 0 0);      /* Very dark accent */
+  --muted: oklch(0.03 0 0); /* Very dark muted */
+  --muted-foreground: oklch(
+    0.7 0 0
+  ); /* Brighter muted text for better readability */
+  --accent: oklch(0.04 0 0); /* Very dark accent */
   --accent-foreground: oklch(0.95 0 0);
   --destructive: oklch(0.65 0.15 25);
-  --border: oklch(0.1 0 0);       /* Slightly more visible borders */
-  --input: oklch(0.04 0 0);       /* Very dark inputs */
+  --border: oklch(0.1 0 0); /* Slightly more visible borders */
+  --input: oklch(0.04 0 0); /* Very dark inputs */
   --ring: oklch(0.25 0 0);
   --chart-1: oklch(0.7 0.15 210); /* More vibrant charts for visibility */
   --chart-2: oklch(0.75 0.15 180);
   --chart-3: oklch(0.8 0.15 140);
   --chart-4: oklch(0.72 0.15 210);
   --chart-5: oklch(0.78 0.15 30);
-  --sidebar: oklch(0 0 0);        /* True black sidebar */
+  --sidebar: oklch(0 0 0); /* True black sidebar */
   --sidebar-foreground: oklch(0.95 0 0);
   --sidebar-primary: oklch(0.7 0.15 210);
   --sidebar-primary-foreground: oklch(0.95 0 0);
@@ -84,11 +86,11 @@
   --sidebar-accent-foreground: oklch(0.95 0 0);
   --sidebar-border: oklch(0.1 0 0);
   --sidebar-ring: oklch(0.25 0 0);
-  
+
   /* TapTik AI Custom Colors - Dark Mode Only */
-  --ai-blue: oklch(0.6 0.15 210);    /* Slightly more vibrant blue */
-  --ai-purple: oklch(0.65 0.1 260);  /* Slightly more vibrant purple */
-  --ai-green: oklch(0.7 0.15 140);   /* Slightly more vibrant green */
+  --ai-blue: oklch(0.6 0.15 210); /* Slightly more vibrant blue */
+  --ai-purple: oklch(0.65 0.1 260); /* Slightly more vibrant purple */
+  --ai-green: oklch(0.7 0.15 140); /* Slightly more vibrant green */
   --ai-gradient-start: oklch(0.5 0.1 210);
   --ai-gradient-end: oklch(0.7 0.1 240);
 }
@@ -107,13 +109,13 @@
     -webkit-overflow-scrolling: touch;
     overscroll-behavior: smooth;
   }
-  
+
   /* Smooth scroll transitions for all elements */
   * {
     transition-property: transform, opacity, filter;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   }
-  
+
   /* Reduce motion for users who prefer it */
   @media (prefers-reduced-motion: reduce) {
     * {
@@ -121,7 +123,7 @@
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
     }
-    
+
     html {
       scroll-behavior: auto;
     }
@@ -131,81 +133,91 @@
 @layer utilities {
   /* TapTik AI Custom Gradients */
   .bg-gradient-ai-hero {
-    background: linear-gradient(135deg, var(--ai-gradient-start), var(--ai-gradient-end));
+    background: linear-gradient(
+      135deg,
+      var(--ai-gradient-start),
+      var(--ai-gradient-end)
+    );
   }
-  
+
   .bg-gradient-ai-features {
     background: linear-gradient(45deg, var(--ai-blue), var(--ai-purple));
   }
-  
+
   .bg-gradient-ai-stats {
     background: linear-gradient(180deg, var(--ai-purple), var(--ai-green));
   }
-  
+
   .text-gradient-ai {
     background: linear-gradient(135deg, var(--ai-blue), var(--ai-purple));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
-  
+
   .dark .text-gradient-ai {
     background: linear-gradient(135deg, #2563eb, #f1f5f9);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
-  
+
   /* Card gradient border effects */
   .border-gradient {
     position: relative;
-    background: linear-gradient(var(--background), var(--background)) padding-box,
-                linear-gradient(135deg, var(--ai-blue), var(--ai-purple)) border-box;
+    background:
+      linear-gradient(var(--background), var(--background)) padding-box,
+      linear-gradient(135deg, var(--ai-blue), var(--ai-purple)) border-box;
     border: 1px solid transparent;
   }
-  
+
   .border-gradient::before {
-    content: '';
+    content: "";
     position: absolute;
     inset: 0;
     padding: 1px;
     background: linear-gradient(135deg, var(--ai-blue), var(--ai-purple));
     border-radius: inherit;
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
     mask-composite: xor;
     -webkit-mask-composite: xor;
     pointer-events: none;
   }
-  
+
   /* Animation utilities */
   .animate-float {
     animation: float 6s ease-in-out infinite;
   }
-  
+
   .animate-float-delayed {
     animation: float 6s ease-in-out infinite;
     animation-delay: 2s;
   }
-  
+
   .animate-pulse-glow {
     animation: pulse-glow 2s ease-in-out infinite alternate;
   }
-  
+
   @keyframes float {
-    0%, 100% {
+    0%,
+    100% {
       transform: translateY(0px);
     }
     50% {
       transform: translateY(-20px);
     }
   }
-  
+
   @keyframes pulse-glow {
     0% {
       box-shadow: 0 0 5px rgba(59, 130, 246, 0.3);
     }
     100% {
-      box-shadow: 0 0 20px rgba(59, 130, 246, 0.6), 0 0 30px rgba(139, 92, 246, 0.3);
+      box-shadow:
+        0 0 20px rgba(59, 130, 246, 0.6),
+        0 0 30px rgba(139, 92, 246, 0.3);
     }
   }
 }

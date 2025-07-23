@@ -32,14 +32,6 @@ export function Hero({ title, subtitle, primaryCTA, secondaryCTA }: HeroProps) {
   });
 
   // Enhanced parallax effects with spring physics for smoother animations
-  const backgroundY = useSpring(
-    useTransform(scrollYProgress, [0, 1], ["0%", "80%"]),
-    {
-      stiffness: 100,
-      damping: 30,
-      restDelta: 0.001,
-    }
-  );
 
   const iconsY = useSpring(
     useTransform(scrollYProgress, [0, 1], ["0%", "50%"]),
@@ -47,7 +39,7 @@ export function Hero({ title, subtitle, primaryCTA, secondaryCTA }: HeroProps) {
       stiffness: 120,
       damping: 25,
       restDelta: 0.001,
-    }
+    },
   );
 
   const titleY = useSpring(
@@ -56,7 +48,7 @@ export function Hero({ title, subtitle, primaryCTA, secondaryCTA }: HeroProps) {
       stiffness: 150,
       damping: 30,
       restDelta: 0.001,
-    }
+    },
   );
 
   const subtitleY = useSpring(
@@ -65,7 +57,7 @@ export function Hero({ title, subtitle, primaryCTA, secondaryCTA }: HeroProps) {
       stiffness: 140,
       damping: 28,
       restDelta: 0.001,
-    }
+    },
   );
 
   const buttonsY = useSpring(
@@ -74,7 +66,7 @@ export function Hero({ title, subtitle, primaryCTA, secondaryCTA }: HeroProps) {
       stiffness: 130,
       damping: 26,
       restDelta: 0.001,
-    }
+    },
   );
 
   const scale = useSpring(useTransform(scrollYProgress, [0, 0.6], [1, 0.85]), {
@@ -88,7 +80,7 @@ export function Hero({ title, subtitle, primaryCTA, secondaryCTA }: HeroProps) {
     {
       stiffness: 110,
       damping: 28,
-    }
+    },
   );
 
   const subtitleOpacity = useSpring(
@@ -96,7 +88,7 @@ export function Hero({ title, subtitle, primaryCTA, secondaryCTA }: HeroProps) {
     {
       stiffness: 105,
       damping: 26,
-    }
+    },
   );
 
   const buttonsOpacity = useSpring(
@@ -104,7 +96,7 @@ export function Hero({ title, subtitle, primaryCTA, secondaryCTA }: HeroProps) {
     {
       stiffness: 100,
       damping: 24,
-    }
+    },
   );
 
   // Smooth scroll transition effects - reduced blur for better readability
@@ -112,7 +104,6 @@ export function Hero({ title, subtitle, primaryCTA, secondaryCTA }: HeroProps) {
   const contentRotateX = useTransform(scrollYProgress, [0, 0.5], [0, -3]);
 
   // Background blur effect for depth (removed for smoother performance)
-  const backgroundBlur = useTransform(scrollYProgress, [0, 0.5, 1], [0, 1, 4]);
 
   return (
     <section
@@ -136,16 +127,6 @@ export function Hero({ title, subtitle, primaryCTA, secondaryCTA }: HeroProps) {
         style={{ y: iconsY }}
       >
         {floatingIcons.map(({ Icon, delay, x, y }, index) => {
-          const iconScrollY = useSpring(
-            useTransform(scrollYProgress, [0, 1], ["0%", `${30 + index * 5}%`]),
-            { stiffness: 100 + index * 10, damping: 25 + index * 2 }
-          );
-          const iconOpacity = useTransform(
-            scrollYProgress,
-            [0, 0.6, 1],
-            [0.6, 0.3, 0]
-          );
-
           return (
             <motion.div
               key={index}
@@ -153,8 +134,6 @@ export function Hero({ title, subtitle, primaryCTA, secondaryCTA }: HeroProps) {
               style={{
                 left: `${20 + index * 15}%`,
                 top: `${30 + index * 10}%`,
-                y: iconScrollY,
-                opacity: iconOpacity,
               }}
               initial={{ opacity: 0, scale: 0, rotate: -180 }}
               animate={{

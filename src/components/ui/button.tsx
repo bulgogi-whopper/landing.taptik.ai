@@ -34,7 +34,7 @@ const buttonVariants = cva(
       variant: "primary",
       size: "default",
     },
-  }
+  },
 );
 
 interface ButtonProps
@@ -59,7 +59,11 @@ function Button({
   const isDisabled = disabled || loading;
 
   if (href && !asChild) {
-    const { href: _, ...linkProps } = props as any;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { href: _href, ...linkProps } = props as {
+      href?: string;
+      [key: string]: unknown;
+    };
     return (
       <Link
         href={href}

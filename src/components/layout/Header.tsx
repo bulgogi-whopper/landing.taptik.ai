@@ -1,14 +1,14 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import Link from "next/link"
-import { Menu, X } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { ThemeToggle } from "@/components/ui/theme-toggle"
-import { cn } from "@/lib/utils"
+import * as React from "react";
+import Link from "next/link";
+import { Menu, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { cn } from "@/lib/utils";
 
 interface HeaderProps {
-  className?: string
+  className?: string;
 }
 
 const navigation = [
@@ -17,24 +17,24 @@ const navigation = [
   { name: "통계", href: "#stats" },
   { name: "후기", href: "#testimonials" },
   { name: "연락처", href: "#contact" },
-]
+];
 
 export function Header({ className }: HeaderProps) {
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false)
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen)
-  }
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   const closeMenu = () => {
-    setIsMenuOpen(false)
-  }
+    setIsMenuOpen(false);
+  };
 
   return (
     <header
       className={cn(
         "sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60",
-        className
+        className,
       )}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -74,9 +74,7 @@ export function Header({ className }: HeaderProps) {
             <Button variant="outline" size="sm">
               로그인
             </Button>
-            <Button size="sm">
-              시작하기
-            </Button>
+            <Button size="sm">시작하기</Button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -125,5 +123,5 @@ export function Header({ className }: HeaderProps) {
         )}
       </div>
     </header>
-  )
+  );
 }

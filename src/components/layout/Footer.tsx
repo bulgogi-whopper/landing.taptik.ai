@@ -1,8 +1,8 @@
-import Link from "next/link"
-import { Mail, Phone, Github, Twitter, Linkedin } from "lucide-react"
+import Link from "next/link";
+import { Mail, Phone, Github, Twitter, Linkedin } from "lucide-react";
 
 interface FooterProps {
-  className?: string
+  className?: string;
 }
 
 const footerLinks = {
@@ -29,7 +29,7 @@ const footerLinks = {
     { name: "이용약관", href: "#terms" },
     { name: "쿠키 정책", href: "#cookies" },
   ],
-}
+};
 
 const socialLinks = [
   {
@@ -47,7 +47,7 @@ const socialLinks = [
     href: "https://linkedin.com/company/taptik",
     icon: Linkedin,
   },
-]
+];
 
 export function Footer({ className }: FooterProps) {
   return (
@@ -67,9 +67,10 @@ export function Footer({ className }: FooterProps) {
                 </span>
               </Link>
               <p className="text-muted-foreground mb-6 max-w-sm">
-                AI를 모든 사람에게. 복잡한 AI 기술을 쉽고 직관적으로 사용할 수 있도록 돕는 혁신적인 플랫폼입니다.
+                AI를 모든 사람에게. 복잡한 AI 기술을 쉽고 직관적으로 사용할 수
+                있도록 돕는 혁신적인 플랫폼입니다.
               </p>
-              
+
               {/* Contact Info */}
               <div className="space-y-2 mb-6">
                 <div className="flex items-center space-x-2 text-sm text-muted-foreground">
@@ -180,5 +181,5 @@ export function Footer({ className }: FooterProps) {
         </div>
       </div>
     </footer>
-  )
+  );
 }
