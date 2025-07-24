@@ -2,21 +2,27 @@
 
 import React, { useState, useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { 
-  Mail, 
-  Phone, 
-  MapPin, 
-  Clock, 
-  Send, 
-  CheckCircle, 
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Clock,
+  Send,
+  CheckCircle,
   AlertCircle,
   Github,
   Twitter,
   Linkedin,
   MessageSquare,
-  Youtube
+  Youtube,
 } from "lucide-react";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+} from "@/components/ui/card";
 import { ContactForm, FormState, ContactProps } from "@/types";
 
 // Form validation utility
@@ -62,7 +68,7 @@ function ContactFormComponent({ onSubmit }: ContactFormComponentProps) {
   });
 
   const handleInputChange = (field: keyof ContactForm, value: string) => {
-    setFormState(prev => ({
+    setFormState((prev) => ({
       ...prev,
       values: { ...prev.values, [field]: value },
       errors: { ...prev.errors, [field]: undefined }, // Clear error on input
@@ -71,19 +77,19 @@ function ContactFormComponent({ onSubmit }: ContactFormComponentProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     const errors = validateForm(formState.values);
-    
+
     if (Object.keys(errors).length > 0) {
-      setFormState(prev => ({ ...prev, errors }));
+      setFormState((prev) => ({ ...prev, errors }));
       return;
     }
 
-    setFormState(prev => ({ ...prev, isSubmitting: true }));
+    setFormState((prev) => ({ ...prev, isSubmitting: true }));
 
     try {
       await onSubmit(formState.values);
-      setFormState(prev => ({
+      setFormState((prev) => ({
         ...prev,
         isSubmitting: false,
         isSubmitted: true,
@@ -93,10 +99,10 @@ function ContactFormComponent({ onSubmit }: ContactFormComponentProps) {
 
       // Reset success message after 5 seconds
       setTimeout(() => {
-        setFormState(prev => ({ ...prev, isSubmitted: false }));
+        setFormState((prev) => ({ ...prev, isSubmitted: false }));
       }, 5000);
-    } catch (error) {
-      setFormState(prev => ({
+    } catch {
+      setFormState((prev) => ({
         ...prev,
         isSubmitting: false,
         errors: { message: "메시지 전송에 실패했습니다. 다시 시도해주세요." },
@@ -107,10 +113,7 @@ function ContactFormComponent({ onSubmit }: ContactFormComponentProps) {
   const { values, errors, isSubmitting, isSubmitted } = formState;
 
   return (
-    <Card 
-      variant="contact"
-                    className="p-8 bg-background dark:bg-gray-900"
-    >
+    <Card variant="contact" className="p-8 bg-background dark:bg-gray-900">
       <CardHeader className="p-0 mb-6">
         <CardTitle className="text-2xl font-bold text-foreground dark:text-gray-100">
           문의하기
@@ -136,7 +139,10 @@ function ContactFormComponent({ onSubmit }: ContactFormComponentProps) {
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Name Field */}
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-foreground dark:text-gray-200 mb-2">
+          <label
+            htmlFor="name"
+            className="block text-sm font-medium text-foreground dark:text-gray-200 mb-2"
+          >
             이름 *
           </label>
           <input
@@ -145,8 +151,8 @@ function ContactFormComponent({ onSubmit }: ContactFormComponentProps) {
             value={values.name}
             onChange={(e) => handleInputChange("name", e.target.value)}
             className={`w-full px-4 py-3 rounded-lg border transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary/50 dark:bg-gray-800 dark:text-gray-100 ${
-              errors.name 
-                ? "border-red-300 dark:border-red-600 bg-red-50 dark:bg-red-950/20" 
+              errors.name
+                ? "border-red-300 dark:border-red-600 bg-red-50 dark:bg-red-950/20"
                 : "border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800"
             }`}
             placeholder="홍길동"
@@ -167,7 +173,10 @@ function ContactFormComponent({ onSubmit }: ContactFormComponentProps) {
 
         {/* Email Field */}
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-foreground dark:text-gray-200 mb-2">
+          <label
+            htmlFor="email"
+            className="block text-sm font-medium text-foreground dark:text-gray-200 mb-2"
+          >
             이메일 *
           </label>
           <input
@@ -176,8 +185,8 @@ function ContactFormComponent({ onSubmit }: ContactFormComponentProps) {
             value={values.email}
             onChange={(e) => handleInputChange("email", e.target.value)}
             className={`w-full px-4 py-3 rounded-lg border transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary/50 dark:bg-gray-800 dark:text-gray-100 ${
-              errors.email 
-                ? "border-red-300 dark:border-red-600 bg-red-50 dark:bg-red-950/20" 
+              errors.email
+                ? "border-red-300 dark:border-red-600 bg-red-50 dark:bg-red-950/20"
                 : "border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800"
             }`}
             placeholder="your@email.com"
@@ -198,7 +207,10 @@ function ContactFormComponent({ onSubmit }: ContactFormComponentProps) {
 
         {/* Message Field */}
         <div>
-          <label htmlFor="message" className="block text-sm font-medium text-foreground dark:text-gray-200 mb-2">
+          <label
+            htmlFor="message"
+            className="block text-sm font-medium text-foreground dark:text-gray-200 mb-2"
+          >
             메시지 *
           </label>
           <textarea
@@ -207,8 +219,8 @@ function ContactFormComponent({ onSubmit }: ContactFormComponentProps) {
             value={values.message}
             onChange={(e) => handleInputChange("message", e.target.value)}
             className={`w-full px-4 py-3 rounded-lg border transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary/50 dark:bg-gray-800 dark:text-gray-100 resize-vertical ${
-              errors.message 
-                ? "border-red-300 dark:border-red-600 bg-red-50 dark:bg-red-950/20" 
+              errors.message
+                ? "border-red-300 dark:border-red-600 bg-red-50 dark:bg-red-950/20"
                 : "border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800"
             }`}
             placeholder="TapTik에 대해 궁금한 점이나 제안사항을 자유롭게 남겨주세요..."
@@ -236,7 +248,7 @@ function ContactFormComponent({ onSubmit }: ContactFormComponentProps) {
           className={`w-full py-3 px-6 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center gap-2 ${
             isSubmitting
               ? "bg-gray-400 dark:bg-gray-600 cursor-not-allowed"
-                                : "bg-primary hover:bg-primary/90 hover:shadow-lg text-white"
+              : "bg-primary hover:bg-primary/90 hover:shadow-lg text-white"
           }`}
         >
           {isSubmitting ? (
@@ -286,16 +298,41 @@ function ContactInfo() {
   ];
 
   const socialLinks = [
-    { icon: Github, label: "GitHub", href: "https://github.com/taptik-dev", color: "#333" },
-    { icon: Twitter, label: "Twitter", href: "https://twitter.com/taptik_dev", color: "#1DA1F2" },
-    { icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com/company/taptik", color: "#0077B5" },
-    { icon: MessageSquare, label: "Discord", href: "https://discord.gg/taptik-dev", color: "#5865F2" },
-    { icon: Youtube, label: "YouTube", href: "https://youtube.com/@taptik-dev", color: "#FF0000" },
+    {
+      icon: Github,
+      label: "GitHub",
+      href: "https://github.com/taptik-dev",
+      color: "#333",
+    },
+    {
+      icon: Twitter,
+      label: "Twitter",
+      href: "https://twitter.com/taptik_dev",
+      color: "#1DA1F2",
+    },
+    {
+      icon: Linkedin,
+      label: "LinkedIn",
+      href: "https://linkedin.com/company/taptik",
+      color: "#0077B5",
+    },
+    {
+      icon: MessageSquare,
+      label: "Discord",
+      href: "https://discord.gg/taptik-dev",
+      color: "#5865F2",
+    },
+    {
+      icon: Youtube,
+      label: "YouTube",
+      href: "https://youtube.com/@taptik-dev",
+      color: "#FF0000",
+    },
   ];
 
   return (
     <div className="space-y-8">
-                  <Card className="p-6 bg-background dark:bg-gray-900">
+      <Card className="p-6 bg-background dark:bg-gray-900">
         <CardHeader className="p-0 mb-6">
           <CardTitle className="text-xl font-bold text-foreground dark:text-gray-100">
             연락처 정보
@@ -340,7 +377,7 @@ function ContactInfo() {
       </Card>
 
       {/* Social Media Links */}
-              <Card className="p-6 bg-background dark:bg-gray-900">
+      <Card className="p-6 bg-background dark:bg-gray-900">
         <CardHeader className="p-0 mb-6">
           <CardTitle className="text-xl font-bold text-foreground dark:text-gray-100">
             소셜 미디어
@@ -364,8 +401,8 @@ function ContactInfo() {
                 whileHover={{ scale: 1.05, y: -2 }}
                 className="flex items-center gap-3 p-3 rounded-lg border border-border dark:border-gray-700 hover:border-primary/30 dark:hover:border-blue-500/30 hover:shadow-md transition-all duration-200"
               >
-                <social.icon 
-                  className="w-5 h-5" 
+                <social.icon
+                  className="w-5 h-5"
                   style={{ color: social.color }}
                 />
                 <span className="text-sm font-medium text-foreground dark:text-gray-200">
@@ -388,8 +425,8 @@ export default function Contact({ onSubmit }: ContactProps) {
   // Default contact form handler
   const defaultHandleSubmit = async (data: ContactForm) => {
     // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    console.log('Contact form submitted:', data);
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    console.log("Contact form submitted:", data);
     // In a real app, this would send the data to your backend
   };
 
@@ -413,8 +450,8 @@ export default function Contact({ onSubmit }: ContactProps) {
             TapTik과 함께 시작하세요
           </h2>
           <p className="text-xl text-muted-foreground dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            개발 환경의 혁신을 경험하고 싶으시다면 언제든 연락주세요.
-            궁금한 점이나 제안사항이 있으시면 편하게 문의해주시기 바랍니다.
+            개발 환경의 혁신을 경험하고 싶으시다면 언제든 연락주세요. 궁금한
+            점이나 제안사항이 있으시면 편하게 문의해주시기 바랍니다.
           </p>
         </motion.div>
 
@@ -447,11 +484,11 @@ export default function Contact({ onSubmit }: ContactProps) {
             빠른 응답을 약속드립니다
           </h3>
           <p className="text-muted-foreground dark:text-gray-300 max-w-2xl mx-auto">
-            평일 기준 24시간 내에 답변드리며, 긴급한 문의사항의 경우 
-            더욱 빠른 응답을 위해 전화나 디스코드를 이용해주세요.
+            평일 기준 24시간 내에 답변드리며, 긴급한 문의사항의 경우 더욱 빠른
+            응답을 위해 전화나 디스코드를 이용해주세요.
           </p>
         </motion.div>
       </div>
     </section>
   );
-} 
+}

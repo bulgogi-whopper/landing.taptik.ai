@@ -3,7 +3,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, useInView, useAnimation } from "framer-motion";
 import { Users, Brain, TrendingUp, Zap } from "lucide-react";
-import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
 import { Stat, StatsProps } from "@/types";
 
 // Icon mapping
@@ -38,26 +43,26 @@ function StatCard({ stat, index, isInView }: StatCardProps) {
       setHasAnimated(true);
       const duration = 2000; // 2 seconds animation
       const startTime = Date.now();
-      
+
       const animate = () => {
         const now = Date.now();
         const elapsed = now - startTime;
         const progress = Math.min(elapsed / duration, 1);
-        
+
         // Easing function for smooth animation
         const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
         const easedProgress = easeOutCubic(progress);
-        
+
         const currentCount = Math.floor(stat.value * easedProgress);
         setCount(currentCount);
-        
+
         if (progress < 1) {
           requestAnimationFrame(animate);
         } else {
           setCount(stat.value); // 확실히 최종값으로 설정
         }
       };
-      
+
       requestAnimationFrame(animate);
     }
   }, [isInView, stat.value, hasAnimated]);
@@ -89,7 +94,7 @@ function StatCard({ stat, index, isInView }: StatCardProps) {
       >
         {/* Background effect */}
         <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-        
+
         <div className="relative z-10 text-center">
           {/* Icon */}
           <div className="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-4 sm:mb-6 rounded-full bg-primary/20 dark:bg-blue-500/20 flex items-center justify-center border border-primary/30 group-hover:scale-110 transition-transform duration-300">
@@ -101,7 +106,8 @@ function StatCard({ stat, index, isInView }: StatCardProps) {
           {/* Count Display */}
           <CardHeader className="p-0 space-y-1 sm:space-y-2">
             <CardTitle className="text-2xl sm:text-3xl lg:text-4xl xl:text-4xl font-bold text-foreground dark:text-white group-hover:scale-105 transition-transform duration-300 break-words">
-              {formatNumber(count)}{stat.suffix}
+              {formatNumber(count)}
+              {stat.suffix}
             </CardTitle>
             <CardDescription className="text-sm sm:text-base lg:text-lg font-medium text-muted-foreground dark:text-gray-300 group-hover:text-foreground transition-colors duration-300">
               {stat.label}
@@ -119,13 +125,11 @@ function StatCard({ stat, index, isInView }: StatCardProps) {
 // Main Stats Section Component
 export default function Stats({ stats }: StatsProps) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { 
-    once: true, 
+  const isInView = useInView(ref, {
+    once: true,
     margin: "0px", // 모바일에서 바로 트리거되도록 여백 제거
-    amount: 0.05 // 섹션이 조금만 보여도 트리거되도록 더 낮춤
+    amount: 0.05, // 섹션이 조금만 보여도 트리거되도록 더 낮춤
   });
-
-
 
   return (
     <section
@@ -145,18 +149,18 @@ export default function Stats({ stats }: StatsProps) {
             숫자로 보는 TapTik의 성과
           </h2>
           <p className="text-xl text-muted-foreground dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            전 세계 개발자들이 TapTik과 함께 더 효율적인 개발 환경을 만들어가고 있습니다.
-            실시간으로 업데이트되는 성과 지표를 확인해보세요.
+            전 세계 개발자들이 TapTik과 함께 더 효율적인 개발 환경을 만들어가고
+            있습니다. 실시간으로 업데이트되는 성과 지표를 확인해보세요.
           </p>
         </motion.div>
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 max-w-7xl mx-auto">
           {stats.map((stat, index) => (
-            <StatCard 
-              key={stat.id} 
-              stat={stat} 
-              index={index} 
+            <StatCard
+              key={stat.id}
+              stat={stat}
+              index={index}
               isInView={isInView}
             />
           ))}
@@ -185,4 +189,4 @@ export default function Stats({ stats }: StatsProps) {
       </div>
     </section>
   );
-} 
+}

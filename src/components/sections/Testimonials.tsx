@@ -3,7 +3,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { ChevronLeft, ChevronRight, Star, Quote } from "lucide-react";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
+import {
+  Card,
+  CardTitle,
+  CardDescription,
+  CardContent,
+} from "@/components/ui/card";
 import { Testimonial, TestimonialsProps } from "@/types";
 
 // Star Rating Component
@@ -42,10 +47,10 @@ function TestimonialCard({ testimonial, isActive }: TestimonialCardProps) {
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ 
-        opacity: isActive ? 1 : 0.6, 
+      animate={{
+        opacity: isActive ? 1 : 0.6,
         scale: isActive ? 1 : 0.9,
-        y: isActive ? 0 : 20
+        y: isActive ? 0 : 20,
       }}
       transition={{ duration: 0.5, ease: "easeOut" }}
       className="w-full"
@@ -70,7 +75,7 @@ function TestimonialCard({ testimonial, isActive }: TestimonialCardProps) {
 
           {/* Testimonial Content */}
           <blockquote className="text-foreground leading-relaxed mb-6 text-lg dark:text-gray-200">
-            "{testimonial.content}"
+            &ldquo;{testimonial.content}&rdquo;
           </blockquote>
 
           {/* User Info */}
@@ -79,20 +84,23 @@ function TestimonialCard({ testimonial, isActive }: TestimonialCardProps) {
             <div className="relative">
               <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center border-2 border-primary/20 group-hover:border-primary/40 transition-colors duration-300">
                 {testimonial.avatar ? (
+                  /* eslint-disable-next-line @next/next/no-img-element */
                   <img
                     src={testimonial.avatar}
                     alt={testimonial.name}
                     className="w-full h-full rounded-full object-cover"
-                                         onError={(e) => {
-                       // Fallback to initials if image fails to load
-                       e.currentTarget.style.display = 'none';
-                       (e.currentTarget.nextElementSibling as HTMLElement)!.style.display = 'flex';
-                     }}
+                    onError={(e) => {
+                      // Fallback to initials if image fails to load
+                      e.currentTarget.style.display = "none";
+                      (e.currentTarget
+                        .nextElementSibling as HTMLElement)!.style.display =
+                        "flex";
+                    }}
                   />
                 ) : null}
                 <div
                   className="w-full h-full rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-semibold text-lg"
-                  style={{ display: testimonial.avatar ? 'none' : 'flex' }}
+                  style={{ display: testimonial.avatar ? "none" : "flex" }}
                 >
                   {testimonial.name.charAt(0)}
                 </div>
@@ -169,7 +177,9 @@ export default function Testimonials({ testimonials }: TestimonialsProps) {
 
   // Navigation functions
   const goToPrevious = () => {
-    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+    setCurrentIndex(
+      (prev) => (prev - 1 + testimonials.length) % testimonials.length,
+    );
     setIsAutoPlaying(false);
   };
 
@@ -209,8 +219,8 @@ export default function Testimonials({ testimonials }: TestimonialsProps) {
             개발자들의 진솔한 후기
           </h2>
           <p className="text-xl text-muted-foreground dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            전 세계 개발자들이 TapTik과 함께 어떻게 개발 생산성을 혁신했는지 들어보세요.
-            실제 사용 경험을 바탕으로 한 솔직한 평가입니다.
+            전 세계 개발자들이 TapTik과 함께 어떻게 개발 생산성을 혁신했는지
+            들어보세요. 실제 사용 경험을 바탕으로 한 솔직한 평가입니다.
           </p>
         </motion.div>
 
@@ -235,7 +245,9 @@ export default function Testimonials({ testimonials }: TestimonialsProps) {
                 {/* Navigation Arrows - 카드에만 상대적으로 위치 */}
                 <motion.button
                   initial={{ opacity: 0, x: -20 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                  animate={
+                    isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }
+                  }
                   transition={{ duration: 0.6, delay: 0.3 }}
                   onClick={goToPrevious}
                   className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-16 z-10 w-12 h-12 bg-background/80 dark:bg-gray-800/80 backdrop-blur-sm border border-border rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300 shadow-lg"
@@ -246,7 +258,9 @@ export default function Testimonials({ testimonials }: TestimonialsProps) {
 
                 <motion.button
                   initial={{ opacity: 0, x: 20 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
+                  animate={
+                    isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }
+                  }
                   transition={{ duration: 0.6, delay: 0.3 }}
                   onClick={goToNext}
                   className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-16 z-10 w-12 h-12 bg-background/80 dark:bg-gray-800/80 backdrop-blur-sm border border-border rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300 shadow-lg"
@@ -285,7 +299,8 @@ export default function Testimonials({ testimonials }: TestimonialsProps) {
           className="text-center mt-8"
         >
           <p className="text-sm text-muted-foreground dark:text-gray-400">
-            {isAutoPlaying ? "자동 재생 중" : "수동 탐색 모드"} • {testimonials.length}개의 후기
+            {isAutoPlaying ? "자동 재생 중" : "수동 탐색 모드"} •{" "}
+            {testimonials.length}개의 후기
           </p>
         </motion.div>
 
@@ -304,7 +319,7 @@ export default function Testimonials({ testimonials }: TestimonialsProps) {
             whileTap={{ scale: 0.95 }}
             className="inline-block"
           >
-            <button className="px-8 py-3 bg-primary hover:bg-primary/90 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
+            <button className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold text-lg rounded-xl shadow-2xl shadow-blue-500/30 hover:shadow-blue-500/50 transition-all duration-300 transform hover:-translate-y-1">
               무료로 시작하기
             </button>
           </motion.div>
@@ -312,4 +327,4 @@ export default function Testimonials({ testimonials }: TestimonialsProps) {
       </div>
     </section>
   );
-} 
+}

@@ -1,6 +1,12 @@
 "use client";
 
-import { motion, useScroll, useTransform, useSpring, useReducedMotion } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useSpring,
+  useReducedMotion,
+} from "framer-motion";
 import {
   Brain,
   Sparkles,
@@ -31,79 +37,93 @@ const floatingIcons = [
 
 // 색상 팔레트 최적화
 const colorPalette = [
-  'text-blue-400/50', 'text-purple-400/50', 'text-cyan-400/50', 
-  'text-emerald-400/50', 'text-yellow-400/50', 'text-pink-400/50',
-  'text-indigo-400/50', 'text-orange-400/50'
+  "text-blue-400/50",
+  "text-purple-400/50",
+  "text-cyan-400/50",
+  "text-emerald-400/50",
+  "text-yellow-400/50",
+  "text-pink-400/50",
+  "text-indigo-400/50",
+  "text-orange-400/50",
 ];
 
 export function Hero({ title, subtitle, primaryCTA, secondaryCTA }: HeroProps) {
   const ref = useRef<HTMLElement>(null);
   const shouldReduceMotion = useReducedMotion();
-  
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
   });
 
   // 성능 최적화된 spring 설정
-  const springConfig = useMemo(() => ({
-    stiffness: 100,
-    damping: 25,
-    restDelta: 0.001,
-  }), []);
+  const springConfig = useMemo(
+    () => ({
+      stiffness: 100,
+      damping: 25,
+      restDelta: 0.001,
+    }),
+    [],
+  );
 
   // 향상된 패럴랙스 효과 - Hook 규칙 준수
   const iconsY = useSpring(
     useTransform(scrollYProgress, [0, 1], ["0%", "40%"]),
-    springConfig
+    springConfig,
   );
 
   const titleY = useSpring(
     useTransform(scrollYProgress, [0, 1], ["0%", "25%"]),
-    springConfig
+    springConfig,
   );
 
   const subtitleY = useSpring(
     useTransform(scrollYProgress, [0, 1], ["0%", "35%"]),
-    springConfig
+    springConfig,
   );
 
   const buttonsY = useSpring(
     useTransform(scrollYProgress, [0, 1], ["0%", "40%"]),
-    springConfig
+    springConfig,
   );
 
   const scale = useSpring(
-    useTransform(scrollYProgress, [0, 0.6], [1, 0.88]), 
-    springConfig
+    useTransform(scrollYProgress, [0, 0.6], [1, 0.88]),
+    springConfig,
   );
 
   // 부드러운 fade-out 효과
   const contentOpacity = useSpring(
     useTransform(scrollYProgress, [0, 0.3, 0.7], [1, 0.85, 0]),
-    { stiffness: 80, damping: 20 }
+    { stiffness: 80, damping: 20 },
   );
 
   // 배경 블러 효과 (성능 최적화)
-  const contentBlur = useTransform(scrollYProgress, [0, 0.4, 0.8], [0, 0.3, 1.5]);
+  const contentBlur = useTransform(
+    scrollYProgress,
+    [0, 0.4, 0.8],
+    [0, 0.3, 1.5],
+  );
 
   // 버튼 클릭 핸들러 메모이제이션
   const handlePrimaryClick = useCallback(() => {
     // Analytics tracking can be added here
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', 'click', {
-        event_category: 'CTA',
-        event_label: 'Primary Button',
+    if (typeof window !== "undefined" && "gtag" in window) {
+      const gtag = (window as { gtag: (...args: unknown[]) => void }).gtag;
+      gtag("event", "click", {
+        event_category: "CTA",
+        event_label: "Primary Button",
       });
     }
   }, []);
 
   const handleSecondaryClick = useCallback(() => {
     // Analytics tracking can be added here
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', 'click', {
-        event_category: 'CTA',
-        event_label: 'Secondary Button',
+    if (typeof window !== "undefined" && "gtag" in window) {
+      const gtag = (window as { gtag: (...args: unknown[]) => void }).gtag;
+      gtag("event", "click", {
+        event_category: "CTA",
+        event_label: "Secondary Button",
       });
     }
   }, []);
@@ -116,11 +136,11 @@ export function Hero({ title, subtitle, primaryCTA, secondaryCTA }: HeroProps) {
       role="banner"
     >
       {/* 향상된 배경 그라디언트 */}
-      <div 
+      <div
         className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-800"
         aria-hidden="true"
       />
-      
+
       {/* 텍스트 가독성을 위한 오버레이 강화 */}
       <motion.div
         className="absolute inset-0 bg-gradient-to-br from-blue-950/20 via-purple-950/10 to-emerald-950/15"
@@ -137,12 +157,12 @@ export function Hero({ title, subtitle, primaryCTA, secondaryCTA }: HeroProps) {
         aria-hidden="true"
       >
         {floatingIcons.map(({ Icon, delay, x, y, duration }, index) => {
-          const baseLeft = 15 + (index * 10) % 70;
-          const baseTop = 20 + (index * 8) % 60;
-          const iconSizeClass = index % 2 === 0 ? 'w-8 h-8' : 'w-7 h-7';
+          const baseLeft = 15 + ((index * 10) % 70);
+          const baseTop = 20 + ((index * 8) % 60);
+          const iconSizeClass = index % 2 === 0 ? "w-8 h-8" : "w-7 h-7";
           const opacity = 0.5 + (index % 2) * 0.1;
           const colorClass = colorPalette[index % colorPalette.length];
-          const hoverColorClass = colorClass.replace('/50', '/80');
+          const hoverColorClass = colorClass.replace("/50", "/80");
 
           return (
             <motion.div
@@ -152,9 +172,9 @@ export function Hero({ title, subtitle, primaryCTA, secondaryCTA }: HeroProps) {
                 left: `${baseLeft}%`,
                 top: `${baseTop}%`,
               }}
-              initial={{ 
-                opacity: 0, 
-                scale: 0.3, 
+              initial={{
+                opacity: 0,
+                scale: 0.3,
                 rotate: -90,
                 x: x * 1.5,
                 y: y * 1.5,
@@ -168,50 +188,66 @@ export function Hero({ title, subtitle, primaryCTA, secondaryCTA }: HeroProps) {
               }}
               transition={{
                 opacity: { delay, duration: 1.5, ease: "easeOut" },
-                scale: { 
-                  delay, 
-                  duration: 1.2, 
+                scale: {
+                  delay,
+                  duration: 1.2,
                   ease: "backOut",
                   type: "spring",
-                  stiffness: 120
+                  stiffness: 120,
                 },
-                rotate: { 
-                  delay, 
-                  duration: 1.8, 
-                  ease: "easeOut" 
+                rotate: {
+                  delay,
+                  duration: 1.8,
+                  ease: "easeOut",
                 },
-                x: shouldReduceMotion ? {} : {
-                  delay: delay + 2,
-                  duration: duration,
-                  repeat: Infinity,
-                  repeatType: "loop",
-                  ease: "easeInOut",
-                },
-                y: shouldReduceMotion ? {} : {
-                  delay: delay + 2,
-                  duration: duration + 0.5,
-                  repeat: Infinity,
-                  repeatType: "reverse",
-                  ease: "easeInOut",
-                },
+                x: shouldReduceMotion
+                  ? {}
+                  : {
+                      delay: delay + 2,
+                      duration: duration,
+                      repeat: Infinity,
+                      repeatType: "loop",
+                      ease: "easeInOut",
+                    },
+                y: shouldReduceMotion
+                  ? {}
+                  : {
+                      delay: delay + 2,
+                      duration: duration + 0.5,
+                      repeat: Infinity,
+                      repeatType: "reverse",
+                      ease: "easeInOut",
+                    },
               }}
-              whileHover={shouldReduceMotion ? {} : {
-                scale: 1.2,
-                rotate: 15,
-                transition: { duration: 0.2 }
-              }}
+              whileHover={
+                shouldReduceMotion
+                  ? {}
+                  : {
+                      scale: 1.2,
+                      rotate: 15,
+                      transition: { duration: 0.2 },
+                    }
+              }
             >
               <motion.div
-                animate={shouldReduceMotion ? {} : {
-                  rotate: [0, 360],
-                }}
-                transition={shouldReduceMotion ? {} : {
-                  duration: 25 + index * 3,
-                  repeat: Infinity,
-                  ease: "linear",
-                }}
+                animate={
+                  shouldReduceMotion
+                    ? {}
+                    : {
+                        rotate: [0, 360],
+                      }
+                }
+                transition={
+                  shouldReduceMotion
+                    ? {}
+                    : {
+                        duration: 25 + index * 3,
+                        repeat: Infinity,
+                        ease: "linear",
+                      }
+                }
               >
-                <Icon 
+                <Icon
                   className={`${iconSizeClass} ${colorClass} drop-shadow-lg hover:${hoverColorClass} transition-colors duration-300 filter hover:drop-shadow-xl`}
                   aria-hidden="true"
                 />
@@ -273,8 +309,9 @@ export function Hero({ title, subtitle, primaryCTA, secondaryCTA }: HeroProps) {
             <span
               className="text-foreground dark:text-white"
               style={{
-                textShadow: "0 0 60px rgba(59, 130, 246, 0.5), 0 0 120px rgba(16, 185, 129, 0.3)",
-                filter: "drop-shadow(0 8px 16px rgba(0, 0, 0, 0.4))"
+                textShadow:
+                  "0 0 60px rgba(59, 130, 246, 0.5), 0 0 120px rgba(16, 185, 129, 0.3)",
+                filter: "drop-shadow(0 8px 16px rgba(0, 0, 0, 0.4))",
               }}
             >
               {title}
@@ -300,7 +337,7 @@ export function Hero({ title, subtitle, primaryCTA, secondaryCTA }: HeroProps) {
             }}
             style={{
               y: shouldReduceMotion ? 0 : subtitleY,
-              textShadow: "0 4px 8px rgba(0, 0, 0, 0.7)"
+              textShadow: "0 4px 8px rgba(0, 0, 0, 0.7)",
             }}
           >
             {subtitle}
@@ -328,11 +365,15 @@ export function Hero({ title, subtitle, primaryCTA, secondaryCTA }: HeroProps) {
             }}
           >
             <motion.div
-              whileHover={shouldReduceMotion ? {} : {
-                scale: 1.05,
-                y: -2,
-                transition: { duration: 0.2 },
-              }}
+              whileHover={
+                shouldReduceMotion
+                  ? {}
+                  : {
+                      scale: 1.05,
+                      y: -2,
+                      transition: { duration: 0.2 },
+                    }
+              }
               whileTap={{ scale: 0.95 }}
             >
               <Button
@@ -345,24 +386,28 @@ export function Hero({ title, subtitle, primaryCTA, secondaryCTA }: HeroProps) {
               >
                 <span className="relative z-10 flex items-center justify-center gap-3">
                   {primaryCTA.text}
-                  <ArrowRight 
-                    className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" 
+                  <ArrowRight
+                    className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300"
                     aria-hidden="true"
                   />
                 </span>
-                <div 
-                  className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" 
+                <div
+                  className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   aria-hidden="true"
                 />
               </Button>
             </motion.div>
 
             <motion.div
-              whileHover={shouldReduceMotion ? {} : {
-                scale: 1.05,
-                y: -2,
-                transition: { duration: 0.2 },
-              }}
+              whileHover={
+                shouldReduceMotion
+                  ? {}
+                  : {
+                      scale: 1.05,
+                      y: -2,
+                      transition: { duration: 0.2 },
+                    }
+              }
               whileTap={{ scale: 0.95 }}
             >
               <Button
@@ -374,8 +419,8 @@ export function Hero({ title, subtitle, primaryCTA, secondaryCTA }: HeroProps) {
                 aria-label={`${secondaryCTA.text} - 보조 액션`}
               >
                 <span className="flex items-center gap-3">
-                  <Play 
-                    className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" 
+                  <Play
+                    className="w-5 h-5 group-hover:scale-110 transition-transform duration-300"
                     aria-hidden="true"
                   />
                   {secondaryCTA.text}
@@ -409,38 +454,54 @@ export function Hero({ title, subtitle, primaryCTA, secondaryCTA }: HeroProps) {
         tabIndex={0}
         aria-label="아래로 스크롤하여 더 많은 콘텐츠 보기"
         onKeyDown={(e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
+          if (e.key === "Enter" || e.key === " ") {
+            window.scrollTo({ top: window.innerHeight, behavior: "smooth" });
           }
         }}
         onClick={() => {
-          window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
+          window.scrollTo({ top: window.innerHeight, behavior: "smooth" });
         }}
       >
         <motion.div
           className="w-6 h-10 border-2 border-gray-300/60 rounded-full flex items-start justify-center pt-2 backdrop-blur-sm bg-white/5 cursor-pointer"
           animate={shouldReduceMotion ? {} : { y: [0, 6, 0] }}
-          transition={shouldReduceMotion ? {} : {
-            duration: 2.0,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          whileHover={shouldReduceMotion ? {} : {
-            scale: 1.1,
-            borderColor: "rgb(59, 130, 246)",
-          }}
+          transition={
+            shouldReduceMotion
+              ? {}
+              : {
+                  duration: 2.0,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }
+          }
+          whileHover={
+            shouldReduceMotion
+              ? {}
+              : {
+                  scale: 1.1,
+                  borderColor: "rgb(59, 130, 246)",
+                }
+          }
         >
           <motion.div
             className="w-1 h-3 bg-gradient-to-b from-blue-400 to-purple-400 rounded-full"
-            animate={shouldReduceMotion ? {} : {
-              scaleY: [1, 0.4, 1],
-              opacity: [0.6, 1, 0.6],
-            }}
-            transition={shouldReduceMotion ? {} : {
-              duration: 2.0,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
+            animate={
+              shouldReduceMotion
+                ? {}
+                : {
+                    scaleY: [1, 0.4, 1],
+                    opacity: [0.6, 1, 0.6],
+                  }
+            }
+            transition={
+              shouldReduceMotion
+                ? {}
+                : {
+                    duration: 2.0,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }
+            }
           />
         </motion.div>
 

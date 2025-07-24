@@ -1,5 +1,3 @@
-import { LucideIcon } from "lucide-react";
-
 // Hero Section Types
 export interface HeroProps {
   title: string;
