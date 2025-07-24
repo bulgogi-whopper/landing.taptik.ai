@@ -1,6 +1,10 @@
 import { Hero } from "@/components/sections/Hero";
 import Features from "@/components/sections/Features";
+import Stats from "@/components/sections/Stats";
+import Testimonials from "@/components/sections/Testimonials";
 import { featuresData } from "@/data/features";
+import { statsData } from "@/data/stats";
+import { testimonialsData } from "@/data/testimonials";
 
 const heroData = {
   title: "딸깍 한 번으로 완성되는 개발 환경",
@@ -21,6 +25,8 @@ export default function Home() {
     <main>
       <Hero {...heroData} />
       <Features features={featuresData} />
+      <Stats stats={statsData} />
+      <Testimonials testimonials={testimonialsData} />
     </main>
   );
 }

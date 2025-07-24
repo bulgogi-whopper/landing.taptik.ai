@@ -51,7 +51,7 @@ function FeatureCard({ feature, index }: FeatureCardProps) {
     >
       <Card
         variant="feature"
-        className="h-full p-6 relative overflow-hidden bg-gradient-to-br from-background via-background to-accent/5 dark:from-gray-900 dark:via-gray-900 dark:to-black border-gradient hover:shadow-xl hover:-translate-y-2 hover:scale-[1.02] transition-all duration-300 ease-out group"
+        className="h-full p-5 sm:p-6 relative overflow-hidden bg-gradient-to-br from-background via-background to-accent/5 dark:from-gray-900 dark:via-gray-900 dark:to-black border-gradient hover:shadow-xl hover:-translate-y-2 hover:scale-[1.02] transition-all duration-300 ease-out group"
       >
         {/* Background gradient effect */}
         <div
@@ -98,7 +98,7 @@ export default function Features({ features }: FeaturesProps) {
   return (
     <section
       id="features"
-      className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-accent/5 dark:bg-gradient-to-b dark:from-gray-950 dark:to-black"
+      className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-accent/5 dark:bg-gradient-to-b dark:from-gray-950 dark:to-black"
     >
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
@@ -109,7 +109,7 @@ export default function Features({ features }: FeaturesProps) {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground dark:text-white">
             딸깍 한 번으로 완성되는 개발 환경
           </h2>
           <p className="text-xl text-muted-foreground dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
@@ -119,7 +119,7 @@ export default function Features({ features }: FeaturesProps) {
         </motion.div>
 
         {/* Features Grid - 3x2 desktop layout, 1 column mobile */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
           {features.map((feature, index) => (
             <FeatureCard key={feature.id} feature={feature} index={index} />
           ))}

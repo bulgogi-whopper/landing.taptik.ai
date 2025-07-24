@@ -33,7 +33,7 @@ export interface Stat {
   value: number;
   label: string;
   suffix?: string;
-  icon: LucideIcon;
+  icon: string; // Changed from LucideIcon to string for icon mapping
 }
 
 export interface StatsProps {
@@ -63,7 +63,7 @@ export interface ContactForm {
 }
 
 export interface ContactProps {
-  onSubmit: (data: ContactForm) => Promise<void>;
+  onSubmit?: (data: ContactForm) => Promise<void>;
 }
 
 // Theme Configuration Types

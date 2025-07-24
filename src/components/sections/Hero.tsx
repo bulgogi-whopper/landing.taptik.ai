@@ -270,28 +270,15 @@ export function Hero({ title, subtitle, primaryCTA, secondaryCTA }: HeroProps) {
               y: shouldReduceMotion ? 0 : titleY,
             }}
           >
-            <motion.span
-              className="bg-gradient-to-r from-blue-300 via-white to-emerald-300 bg-clip-text text-transparent"
-              initial={{
-                backgroundPosition: "0% 50%",
-                backgroundSize: "300% 300%",
-              }}
-              animate={shouldReduceMotion ? {} : {
-                backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-              }}
-              transition={shouldReduceMotion ? {} : {
-                duration: 10,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
+            <span
+              className="text-foreground dark:text-white"
               style={{
-                backgroundSize: "300% 300%",
                 textShadow: "0 0 60px rgba(59, 130, 246, 0.5), 0 0 120px rgba(16, 185, 129, 0.3)",
                 filter: "drop-shadow(0 8px 16px rgba(0, 0, 0, 0.4))"
               }}
             >
               {title}
-            </motion.span>
+            </span>
           </motion.h1>
 
           {/* 향상된 서브타이틀 */}
@@ -353,7 +340,7 @@ export function Hero({ title, subtitle, primaryCTA, secondaryCTA }: HeroProps) {
                 size="lg"
                 href={primaryCTA.href}
                 onClick={handlePrimaryClick}
-                className="group relative overflow-hidden bg-gradient-to-r from-blue-500 via-blue-600 to-purple-600 hover:from-blue-600 hover:via-purple-600 hover:to-emerald-600 text-white px-10 py-5 rounded-2xl font-bold text-lg shadow-2xl hover:shadow-blue-500/25 transition-all duration-500 min-w-[200px]"
+                className="group relative overflow-hidden bg-blue-600 hover:bg-blue-700 text-white px-10 py-5 rounded-2xl font-bold text-lg shadow-2xl hover:shadow-blue-500/25 transition-all duration-500 min-w-[200px]"
                 aria-label={`${primaryCTA.text} - 기본 액션`}
               >
                 <span className="relative z-10 flex items-center justify-center gap-3">
@@ -363,15 +350,8 @@ export function Hero({ title, subtitle, primaryCTA, secondaryCTA }: HeroProps) {
                     aria-hidden="true"
                   />
                 </span>
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-purple-600 via-emerald-600 to-blue-600 opacity-0 group-hover:opacity-100"
-                  initial={{ x: "-100%" }}
-                  whileHover={{ x: "100%" }}
-                  transition={{ duration: 0.8, ease: "easeInOut" }}
-                  aria-hidden="true"
-                />
                 <div 
-                  className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" 
+                  className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" 
                   aria-hidden="true"
                 />
               </Button>
@@ -390,7 +370,7 @@ export function Hero({ title, subtitle, primaryCTA, secondaryCTA }: HeroProps) {
                 size="lg"
                 href={secondaryCTA.href}
                 onClick={handleSecondaryClick}
-                className="group border-2 border-gray-200/30 hover:border-blue-300 px-10 py-5 rounded-2xl font-bold text-lg transition-all duration-300 hover:bg-gradient-to-r hover:from-blue-500/10 hover:to-purple-500/10 backdrop-blur-md text-gray-100 hover:text-white shadow-xl hover:shadow-blue-500/20 min-w-[200px] bg-white/5"
+                className="group border-2 border-gray-200/30 hover:border-blue-300 px-10 py-5 rounded-2xl font-bold text-lg transition-all duration-300 hover:bg-blue-500/20 backdrop-blur-md text-gray-100 hover:text-white shadow-xl hover:shadow-blue-500/20 min-w-[200px] bg-white/5"
                 aria-label={`${secondaryCTA.text} - 보조 액션`}
               >
                 <span className="flex items-center gap-3">
